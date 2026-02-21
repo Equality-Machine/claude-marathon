@@ -1,0 +1,23 @@
+{
+  "SessionStart": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "./task-init.sh"
+        }
+      ]
+    }
+  ],
+  "PostToolUse": [
+    {
+      "matcher": "Edit|Write|Bash|TaskCreate",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "./auto-log-progress.sh"
+        }
+      ]
+    }
+  ]
+}

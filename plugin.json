@@ -1,0 +1,30 @@
+{
+  "name": "marathon",
+  "displayName": "Claude Marathon",
+  "version": "1.0.0",
+  "description": "Run the marathon of epic tasks with Claude. Never lose context, automatically track progress, and seamlessly continue work across sessions.",
+  "author": "b4yesc4t",
+  "homepage": "https://github.com/b4yesc4t/claude-marathon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/b4yesc4t/claude-marathon"
+  },
+  "keywords": [
+    "claude-code",
+    "marathon",
+    "long-running-tasks",
+    "task-management",
+    "context-continuity",
+    "epic-tasks",
+    "multi-session"
+  ],
+  "engines": {
+    "claudeCode": ">=1.0.0"
+  },
+  "dependencies": {
+    "jq": {
+      "optional": true,
+      "description": "JSON processor for better session filtering (recommended but not required)"
+    }
+  }
+}
