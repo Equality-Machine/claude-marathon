@@ -1,0 +1,35 @@
+{
+  "name": "marathon",
+  "owner": {
+    "name": "b4yesc4t",
+    "email": "b4yesc4t@gmail.com"
+  },
+  "metadata": {
+    "description": "Claude Marathon - AI-powered progress tracking for epic, multi-session tasks",
+    "version": "1.0.0",
+    "homepage": "https://github.com/Equality-Machine/claude-marathon"
+  },
+  "plugins": [
+    {
+      "name": "marathon",
+      "version": "1.0.0",
+      "source": ".",
+      "description": "Run the marathon of epic tasks with Claude. Never lose context, automatically track progress, and seamlessly continue work across sessions.",
+      "author": {
+        "name": "b4yesc4t"
+      },
+      "homepage": "https://github.com/Equality-Machine/claude-marathon",
+      "repository": "https://github.com/Equality-Machine/claude-marathon",
+      "license": "MIT",
+      "keywords": [
+        "claude-code",
+        "marathon",
+        "long-running-tasks",
+        "task-management",
+        "context-continuity",
+        "epic-tasks",
+        "multi-session"
+      ]
+    }
+  ]
+}
