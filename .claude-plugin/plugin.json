@@ -4,10 +4,10 @@
   "version": "1.0.0",
   "description": "Run the marathon of epic tasks with Claude. Never lose context, automatically track progress, and seamlessly continue work across sessions.",
   "author": "b4yesc4t",
-  "homepage": "https://github.com/b4yesc4t/claude-marathon",
+  "homepage": "https://github.com/Equality-Machine/claude-marathon",
   "repository": {
     "type": "git",
-    "url": "https://github.com/b4yesc4t/claude-marathon"
+    "url": "https://github.com/Equality-Machine/claude-marathon"
   },
   "keywords": [
     "claude-code",
