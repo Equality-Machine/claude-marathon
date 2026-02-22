@@ -34,18 +34,32 @@ git clone https://github.com/b4yesc4t/claude-marathon marathon
 
 Marathon solves one problem: **Long tasks lose context when sessions end.**
 
+### The Problem
+When working on complex tasks that span multiple Claude Code sessions, you lose valuable context:
+- What did I do last session?
+- What was I about to implement?
+- What decisions did I make and why?
+
+### The Solution
+Marathon **automatically tracks and intelligently summarizes** every operation using Claude Haiku:
+
 **Before Marathon**:
 ```
-Session 1: Implement auth ✅
+Session 1: Edit 20 files for auth feature ✅
 [Context compression happens]
-Session 2: "What did I do yesterday?" ❓
+Session 2: "What did I implement yesterday?" ❓
+          Read through all 20 files manually... 😓
 ```
 
 **With Marathon**:
 ```
-Session 1: Auto-tracking + AI summaries ✅
+Session 1: Edit 20 files ✅
+          → Auto checkpoint triggers
+          → Claude Haiku summarizes: "🎯 Implemented JWT auth system"
 [Context compression happens]
-Session 2: /marathon-review → Full context restored 🎉
+Session 2: /marathon-review
+          → "Last session: JWT auth 75% complete. Next: Add refresh tokens" ✅
+          Resume immediately! 🚀
 ```
 
 ---
@@ -72,13 +86,16 @@ Session 2: /marathon-review → Full context restored 🎉
 
 ## 🎮 Commands
 
-```bash
-/marathon-config      # Configure auto-checkpoint threshold
-/marathon-checkpoint  # Save detailed progress report
-/marathon-milestone   # Mark major achievement
-/marathon-review      # Restore context from past sessions
-/marathon-end         # Complete task, create summary
-```
+| Command | Purpose | When to Use |
+|:--------|:--------|:------------|
+| **Auto Checkpoint** | AI batch summary (automatic) | Every N tool calls (default: 20) |
+| `/marathon-config` | Configure settings | Adjust auto-checkpoint threshold (10-50) |
+| `/marathon-checkpoint` | Save detailed checkpoint | After completing major work, before breaks |
+| `/marathon-milestone` | Mark achievement | MVP complete, deployment, major goal reached |
+| `/marathon-review` | Restore context | Start of new session, resuming work |
+| `/marathon-end` | Complete and archive | Task fully finished, create final summary |
+
+**Note**: Auto checkpoint runs automatically in background - no command needed!
 
 ---
 
