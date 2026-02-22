@@ -14,18 +14,13 @@
 ## ⚡ クイックスタート
 
 ```bash
-# インストール
-cd ~/.claude/plugins
-git clone https://github.com/b4yesc4t/claude-marathon marathon
+# マーケットプレイスを追加
+/plugin marketplace add Equality-Machine/claude-marathon
 
-# ~/.claude/settings.json で有効化
-{
-  "enabledPlugins": {
-    "marathon": true
-  }
-}
+# プラグインをインストール
+/plugin install marathon@marathon
 
-# Claude Codeを再起動 - 完了！🎉
+# 完了！🎉
 ```
 
 ---

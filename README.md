@@ -13,8 +13,6 @@
 
 ## ⚡ Quick Start
 
-### Option 1: Install via Marketplace (Recommended)
-
 ```bash
 # Add the marketplace
 /plugin marketplace add Equality-Machine/claude-marathon
@@ -23,22 +21,6 @@
 /plugin install marathon@marathon
 
 # Done! 🎉
-```
-
-### Option 2: Manual Installation (Development)
-
-```bash
-# Clone the repository
-cd ~/.claude/plugins
-git clone https://github.com/Equality-Machine/claude-marathon.git marathon
-
-# Add as local marketplace
-/plugin marketplace add ./marathon
-
-# Install the plugin
-/plugin install marathon@marathon
-
-# Restart Claude Code - Done! 🎉
 ```
 
 ---

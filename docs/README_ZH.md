@@ -14,18 +14,13 @@
 ## ⚡ 快速开始
 
 ```bash
-# 安装
-cd ~/.claude/plugins
-git clone https://github.com/Equality-Machine/claude-marathon.git marathon
+# 添加 marketplace
+/plugin marketplace add Equality-Machine/claude-marathon
 
-# 在 ~/.claude/settings.json 中启用
-{
-  "enabledPlugins": {
-    "marathon": true
-  }
-}
+# 安装插件
+/plugin install marathon@marathon
 
-# 重启 Claude Code - 完成！🎉
+# 完成！🎉
 ```
 
 ---

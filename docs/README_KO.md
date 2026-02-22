@@ -14,18 +14,13 @@
 ## ⚡ 빠른 시작
 
 ```bash
-# 설치
-cd ~/.claude/plugins
-git clone https://github.com/b4yesc4t/claude-marathon marathon
+# 마켓플레이스 추가
+/plugin marketplace add Equality-Machine/claude-marathon
 
-# ~/.claude/settings.json에서 활성화
-{
-  "enabledPlugins": {
-    "marathon": true
-  }
-}
+# 플러그인 설치
+/plugin install marathon@marathon
 
-# Claude Code 재시작 - 완료! 🎉
+# 완료! 🎉
 ```
 
 ---

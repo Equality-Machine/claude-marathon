@@ -14,18 +14,13 @@
 ## ⚡ Inicio Rápido
 
 ```bash
-# Instalación
-cd ~/.claude/plugins
-git clone https://github.com/Equality-Machine/claude-marathon.git marathon
+# Añadir el marketplace
+/plugin marketplace add Equality-Machine/claude-marathon
 
-# Habilitar en ~/.claude/settings.json
-{
-  "enabledPlugins": {
-    "marathon": true
-  }
-}
+# Instalar el plugin
+/plugin install marathon@marathon
 
-# Reiniciar Claude Code - ¡Listo! 🎉
+# ¡Listo! 🎉
 ```
 
 ---
