@@ -2,57 +2,53 @@
 
 ## Quick Install
 
-### Method 1: Via Git (Recommended)
+### Method 1: Via Marketplace (Recommended)
+
+Claude Code uses a marketplace system for plugin distribution. This is the easiest and recommended way to install Marathon.
 
 ```bash
-# Navigate to Claude plugins directory
+# In Claude Code, run:
+/plugin marketplace add Equality-Machine/claude-marathon
+
+# Then install the plugin:
+/plugin install marathon@marathon
+
+# Done! The plugin is now active. 🎉
+```
+
+### Method 2: Local Development Installation
+
+For developers who want to modify the plugin or test local changes:
+
+```bash
+# Clone the repository
 cd ~/.claude/plugins
+git clone https://github.com/Equality-Machine/claude-marathon.git marathon
 
-# Clone the plugin
-git clone https://github.com/b4yesc4t/claude-marathon marathon
+# Add as local marketplace
+# In Claude Code, run:
+/plugin marketplace add ~/.claude/plugins/marathon
 
-# Verify installation
-cd marathon
-./verify-installation.sh
-
-# Enable the plugin
-# Edit ~/.claude/settings.json and add:
-{
-  "enabledPlugins": {
-    "marathon": true
-  }
-}
+# Install the plugin:
+/plugin install marathon@marathon
 
 # Restart Claude Code
 ```
 
-### Method 2: Manual Installation
+### How Claude Code Plugin Installation Works
 
-1. **Download the Plugin**
+Claude Code uses a **marketplace system** instead of manual file copying:
 
-   Download the latest release from GitHub or extract the plugin package to:
-   ```
-   ~/.claude/plugins/marathon/
-   ```
+1. **Marketplaces** are catalogs (like app stores) that list available plugins
+2. **Adding a marketplace**: `/plugin marketplace add <github-repo>` or `/plugin marketplace add <local-path>`
+3. **Installing plugins**: `/plugin install <plugin-name>@<marketplace-name>`
+4. **Automatic updates**: Claude Code manages plugin versions and updates automatically
 
-2. **Set Permissions**
-
-   ```bash
-   chmod +x ~/.claude/plugins/marathon/hooks/*.sh
-   ```
-
-3. **Enable the Plugin**
-
-   Edit `~/.claude/settings.json`:
-   ```json
-   {
-     "enabledPlugins": {
-       "marathon": true
-     }
-   }
-   ```
-
-4. **Restart Claude Code**
+This approach provides:
+- ✅ Centralized discovery
+- ✅ Version tracking
+- ✅ Automatic updates
+- ✅ Dependency management
 
 ---
 

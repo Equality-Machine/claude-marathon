@@ -13,21 +13,30 @@
 
 ## ⚡ Quick Start
 
+### Option 1: Install via Marketplace (Recommended)
+
 ```bash
-# Install
+# Add the marketplace
+/plugin marketplace add Equality-Machine/claude-marathon
+
+# Install the plugin
+/plugin install marathon@marathon
+
+# Done! 🎉
+```
+
+### Option 2: Manual Installation (Development)
+
+```bash
+# Clone the repository
 cd ~/.claude/plugins
-git clone https://github.com/b4yesc4t/claude-marathon.git marathon
+git clone https://github.com/Equality-Machine/claude-marathon.git marathon
 
-# Verify installation
-cd marathon
-./verify-installation.sh
+# Add as local marketplace
+/plugin marketplace add ./marathon
 
-# Enable in ~/.claude/settings.json
-{
-  "enabledPlugins": {
-    "marathon": true
-  }
-}
+# Install the plugin
+/plugin install marathon@marathon
 
 # Restart Claude Code - Done! 🎉
 ```
