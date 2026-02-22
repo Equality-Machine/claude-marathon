@@ -7,7 +7,7 @@
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-purple)](https://code.claude.com)
 [![Haiku Powered](https://img.shields.io/badge/AI-Claude_Haiku-orange)](https://anthropic.com)
 
-[English](../README.md) | [中文文档](./README_ZH.md)
+**语言**: [English](../README.md) | [中文](./README_ZH.md) | [日本語](./README_JA.md) | [한국어](./README_KO.md) | [Русский](./README_RU.md) | [Español](./README_ES.md)
 
 ---
 
@@ -16,7 +16,7 @@
 ```bash
 # 安装
 cd ~/.claude/plugins
-git clone https://github.com/b4yesc4t/claude-marathon marathon
+git clone https://github.com/Equality-Machine/claude-marathon.git marathon
 
 # 在 ~/.claude/settings.json 中启用
 {

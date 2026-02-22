@@ -7,7 +7,7 @@
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-purple)](https://code.claude.com)
 [![Haiku Powered](https://img.shields.io/badge/AI-Claude_Haiku-orange)](https://anthropic.com)
 
-[中文文档](./docs/README_ZH.md)
+**Languages**: [English](./README.md) | [中文](./docs/README_ZH.md) | [日本語](./docs/README_JA.md) | [한국어](./docs/README_KO.md) | [Русский](./docs/README_RU.md) | [Español](./docs/README_ES.md)
 
 ---
 
@@ -16,7 +16,7 @@
 ```bash
 # Install
 cd ~/.claude/plugins
-git clone https://github.com/b4yesc4t/claude-marathon marathon
+git clone https://github.com/Equality-Machine/claude-marathon.git marathon
 
 # Enable in ~/.claude/settings.json
 {
