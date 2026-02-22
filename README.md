@@ -1,64 +1,90 @@
-# Claude Marathon
+# Claude Marathon 🏃‍♂️
 
-> Manage epic tasks that span multiple sessions. Never lose context, automatically track progress, and seamlessly continue work even after context compression.
+> **Run the marathon of epic tasks with Claude.** Never lose context, automatically track progress with AI-powered summaries, and seamlessly continue work across sessions—even after context compression.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-purple)](https://code.claude.com)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 [中文文档](./docs/README_ZH.md) | [English](./README.md)
 
 ---
 
-## 🎯 What Problem Does This Solve?
+## 🎯 Why Marathon?
 
-**The Challenge**: Complex development tasks often take longer than a single Claude Code session. When context gets compressed or you need to pause, valuable progress and insights can be lost.
+**The Challenge**: Complex tasks often exceed a single Claude Code session. When context gets compressed or you pause work, valuable progress and insights can vanish.
 
-**The Solution**: Claude Marathon automatically tracks your work across multiple sessions, making it easy to pick up exactly where you left off.
+**The Solution**: Marathon automatically tracks every operation with **AI-powered smart summaries**, making it trivial to pick up exactly where you left off—hours, days, or even weeks later.
 
 ---
 
-## ✨ Key Features
+## ✨ Features
 
-###🔍 **Task Review** - Resume with Full Context
-- `/marathon-review` - Analyze all previous sessions, restore complete context
-- Automatically finds related sessions for current project
-- Generates comprehensive initial thinking document
-- Shows what's done, what's pending, and what's next
+### 🤖 Auto Checkpoint - Set It and Forget It
+- **Automatic batch summarization** every N tool calls (default: 20)
+- Uses **Claude Haiku** to intelligently group and summarize operations
+- Zero interruption—runs in background after threshold
+- **Configurable** via `/marathon-config`
 
-### 💾 **Task Checkpoint** - Save Progress Anytime
-- `/marathon-checkpoint` - Save current state during long tasks
-- Records achievements, decisions, and next steps
+Example output:
+```markdown
+## 📊 Auto Summary (2026-02-22 11:03)
+- [11:02] 📝 Edit: test_manual.txt
+- [11:03] 🔧 Refactor: auth module (login.js, token.js)
+```
+
+### 👤 Manual Checkpoint - Deep Context Saves
+- **`/marathon-checkpoint`** - Save detailed checkpoint with context
+- Records achievements, technical decisions, and learnings
 - Creates code snapshots for critical states
-- Works perfectly with auto-recording
+- Perfect for major milestones or before breaks
 
-### ✅ **Task End** - Complete and Archive
-- `/marathon-end` - Comprehensive task completion documentation
+### 🏁 Milestones - Celebrate Achievements
+- **`/marathon-milestone`** - Mark major accomplishments
+- Designate MVP completion, production deployment, or performance goals
+- Create milestone snapshots with impact notes
+- Build a record of significant progress
+
+### ⚙️ Dynamic Configuration
+- **`/marathon-config`** - Adjust settings without editing files
+- Change auto-checkpoint threshold (10-50 tool calls)
+- Toggle smart summarization
+- View current configuration
+
+### 🔍 Session Review - Resume with Full Context
+- **`/marathon-review`** - Analyze all previous sessions
+- Automatically finds sessions for current project (directory-aware)
+- Generates comprehensive initial thinking document
+- Shows what's done, in-progress, and next steps
+
+### ✅ Task Completion - Archive and Document
+- **`/marathon-end`** - Comprehensive task summary
 - Consolidates learnings from all sessions
-- Creates detailed summary with statistics
+- Creates detailed documentation with statistics
 - Archives deliverables and outcomes
 
-### 📝 **Auto-Recording** - Never Miss a Detail
-- Automatically logs file modifications
-- Tracks important command executions (git, npm, docker, etc.)
-- Records task creation events
-- All saved to `progress.md` in real-time
-
-### 📁 **Project Isolation** - Multi-Project Friendly
-- Intelligently filters sessions by working directory
-- Different projects have completely separate session histories
+### 📁 Project Isolation - Multi-Project Friendly
+- Intelligently filters sessions by **working directory**
+- Separate session histories per project
 - No cross-contamination between tasks
 - Clear indication: "Previous session for THIS project"
 
-### 🏗️ **Structured Workspace** - Organized by Design
-Each session creates:
+### 🏗️ Structured Workspace - Organized by Design
+Each session auto-creates:
 ```
 workspace/session_YYYYMMDD_HHMMSS_xxxxx/
-├── session.json              # Metadata (time, directory, git info)
-├── 00-initial-thinking.md    # Task review analysis
-├── progress.md               # Auto + manual progress tracking
-├── learnings.md              # Technical insights accumulated
-├── TASK_SUMMARY.md           # Final task documentation (task-end)
-├── logs/                     # Debug outputs
-├── screenshots/              # Visual artifacts
-├── scripts/                  # Temporary scripts
-└── drafts/                   # Checkpoints and snapshots
+├── session.json                 # Metadata (time, directory, git)
+├── 00-initial-thinking.md       # Task review analysis
+├── progress.md                  # Auto + manual tracking
+├── learnings.md                 # Technical insights
+├── .temp_operations.log         # Operations buffer
+├── .tool_call_counter           # Auto-checkpoint counter
+├── logs/
+│   └── auto-checkpoint.log     # Summarization logs
+├── screenshots/                 # Visual artifacts
+├── scripts/                     # Temporary scripts
+├── drafts/                      # Checkpoints & snapshots
+└── milestones/                  # Milestone snapshots
 ```
 
 ---
@@ -67,315 +93,206 @@ workspace/session_YYYYMMDD_HHMMSS_xxxxx/
 
 ### Installation
 
-**Method 1: Via Git (Recommended)**
-
+**Option 1: Direct Install (Recommended)**
 ```bash
-# Clone to Claude plugins directory
 cd ~/.claude/plugins
 git clone https://github.com/b4yesc4t/claude-marathon marathon
+```
 
-# Enable plugin in ~/.claude/settings.json
+**Option 2: Manual Download**
+1. Download and extract to `~/.claude/plugins/marathon/`
+2. Set permissions: `chmod +x ~/.claude/plugins/marathon/hooks/*.sh`
+
+**Enable the Plugin**
+
+Add to `~/.claude/settings.json`:
+```json
 {
   "enabledPlugins": {
     "marathon": true
   }
 }
-
-# Restart Claude Code
 ```
 
-**Method 2: Manual Install**
+**Restart Claude Code** and you're ready! 🎉
 
-1. Download and extract to `~/.claude/plugins/marathon/`
-2. Set permissions: `chmod +x ~/.claude/plugins/marathon/hooks/*.sh`
-3. Enable in `~/.claude/settings.json`
-4. Restart Claude Code
-
-For detailed installation instructions, see [INSTALL.md](./INSTALL.md)
+> For detailed installation, see [INSTALL.md](./INSTALL.md)
 
 ---
 
-## 📖 Usage Guide
+## 📖 Usage
 
-### Scenario 1: Starting a New Long Task
+### Three-Layer Progress Tracking
 
-```bash
-cd ~/Projects/my-awesome-app
+| Type | Trigger | Purpose | Output |
+|:-----|:--------|:--------|:-------|
+| **🤖 Auto Checkpoint** | Every N calls | Background batch summary | Smart AI-generated summary |
+| **👤 Manual Checkpoint** | `/marathon-checkpoint` | Deep context save | Detailed progress report |
+| **🏁 Milestone** | `/marathon-milestone` | Mark achievements | Celebration + impact notes |
 
-# Claude Code will automatically:
-# ✅ Create workspace/session_YYYYMMDD_HHMMSS_xxxxx/
-# ✅ Set up tracking infrastructure
-# ✅ Add workspace/ to .gitignore (if git repo)
-
-# Start working...
-# All file edits and important commands are auto-recorded
-```
-
-### Scenario 2: Continuing an Existing Task
+### Typical Workflow
 
 ```bash
-cd ~/Projects/my-awesome-app
+# Day 1: Start new feature
+cd ~/Projects/my-app
+# Marathon auto-creates workspace, starts tracking
 
-# Restore context from previous sessions
-/marathon-review
+# Work on feature...
+# Auto checkpoint triggers every 20 tool calls
 
-# Claude will:
-# 1. Find all previous sessions for this project
-# 2. Analyze progress from each session
-# 3. Generate comprehensive initial thinking document
-# 4. Show clear next steps
-
-# Output example:
-🔍 Task Review Complete
-
-📊 Task Statistics
-- Name: Implement JWT Authentication
-- Sessions: 3 sessions over 5 days
-- Completion: ~75%
-
-✅ Progress Summary
-Completed:
-- ✓ User model with password hashing
-- ✓ Login endpoint
-- ✓ Token generation
-
-In Progress:
-- ⏳ Token refresh mechanism (50%)
-
-Pending:
-- ⚪ Integration tests
-- ⚪ API documentation
-
-🎯 Next Steps
-1. Complete token refresh endpoint
-2. Add error handling for edge cases
-3. Write integration tests
-
-# Continue working with full context!
-```
-
-### Scenario 3: Saving Progress Checkpoints
-
-```bash
-# After completing a significant milestone
+# After 2 hours of work
 /marathon-checkpoint
+# ✅ Detailed checkpoint saved
 
-# Claude will:
-# ✅ Summarize work since last checkpoint
-# ✅ Update progress.md
-# ✅ Record technical decisions and learnings
-# ✅ Note next steps
+# Day 3: Continue
+/marathon-review
+# 🔍 Loads all previous context
 
-# Output example:
-✅ Task Checkpoint Saved
+# Keep working...
+# Auto checkpoints continue in background
 
-📍 Current Progress
-- Completed token refresh mechanism
-- Added comprehensive error handling
-- Working on: Integration tests
+# Major milestone reached
+/marathon-milestone
+# 🏁 MVP Complete!
 
-🔧 Changes This Checkpoint
-- Modified 3 files
-- Added RefreshToken model
-- Implemented /auth/refresh endpoint
-
-💡 Key Decision
-Using rotating refresh tokens (vs static)
-Reason: Better security, prevents token theft
-
-🎯 Next: Write integration tests for auth flow
+# Day 7: Finish
+/marathon-end
+# 🎉 Task complete with full documentation
 ```
 
-### Scenario 4: Completing a Task
+---
+
+## 🎮 Commands
+
+| Command | Description | When to Use |
+|:--------|:------------|:------------|
+| **`/marathon-config`** | Configure auto-checkpoint threshold | First time or to adjust frequency |
+| **`/marathon-checkpoint`** | Save detailed manual checkpoint | After milestones, before breaks |
+| **`/marathon-milestone`** | Mark major achievement | MVP, deployment, performance goal |
+| **`/marathon-review`** | Restore context from past sessions | Starting work, after break |
+| **`/marathon-end`** | Complete and archive task | Task finished |
+
+**Auto Checkpoint** runs automatically—no command needed!
+
+---
+
+## 💡 Example: Auto Checkpoint in Action
 
 ```bash
-# When task is fully complete
-/marathon-end
+# You're working on authentication...
+# (Edit 1) src/auth/login.ts
+# (Edit 2) src/auth/token.ts
+# ...
+# (Edit 20) tests/auth.test.ts
 
-# Claude will:
-# 1. Gather information from ALL sessions
-# 2. Create comprehensive TASK_SUMMARY.md
-# 3. Consolidate all learnings
-# 4. Archive deliverables
-# 5. Document outcomes and statistics
+# 🎯 Auto checkpoint triggers!
+# Marathon batches last 20 operations, sends to Claude Haiku:
 
-# Output example:
-🎉 Task Complete - JWT Authentication System
-
-📊 Task Statistics
-- Duration: 7 days (4 sessions)
-- Files Modified: ~12 files
-- Tests Added: 23 tests
-
-✅ Accomplishments
-- ✓ Complete JWT authentication system
-- ✓ Token refresh mechanism
-- ✓ Comprehensive test coverage
-- ✓ API documentation
-
-💡 Key Learnings
-- Rotating refresh tokens improve security
-- bcrypt is sufficient for password hashing
-- Integration tests caught 3 edge cases
-
-📦 Deliverables
-- Production-ready authentication API
-- Full test suite (unit + integration)
-- API documentation
-
-📁 Full Documentation
-See: workspace/session_20260221_143022/TASK_SUMMARY.md
+## 📊 Auto Summary (2026-02-22 14:35)
+- [14:10-14:20] 🎯 Implement JWT authentication - Login + token generation
+- [14:25] 🧪 Add auth integration tests - Cover edge cases
+- [14:30] 🔧 Refactor token utils - Extract common functions
 ```
 
----
-
-## 🎮 Command Reference
-
-| Command | Purpose | When to Use |
-|:--------|:--------|:------------|
-| `/marathon-review` | Restore context from previous sessions | Starting work on existing task, after break |
-| `/marathon-checkpoint` | Save progress during work | After milestone, before switching focus |
-| `/marathon-end` | Complete and archive task | Task finished or stopping for long time |
-
-**Auto-Recording** (no command needed):
-- File modifications → Logged automatically
-- Git/npm/docker commands → Logged automatically
-- Task creation → Logged automatically
-
----
-
-## 🎯 Use Cases
-
-### Perfect For:
-
-✅ **Long-Running Features**
-- Multi-day implementation projects
-- Complex refactoring tasks
-- Large-scale migrations
-
-✅ **Learning & Research**
-- Exploring new technologies
-- Prototyping solutions
-- Technical investigations
-
-✅ **Bug Investigation**
-- Hard-to-reproduce bugs
-- Performance optimization
-- Security audits
-
-✅ **Documentation Projects**
-- Technical writing
-- API documentation
-- Architecture design docs
-
-### Works Great With:
-
-- 🔄 Context compression scenarios
-- 🎯 Multiple parallel projects
-- 📚 Knowledge accumulation
-- 🤝 Team handoffs
-- 📊 Progress tracking
+**Zero interruption. Zero cost (< $0.10/month). Maximum continuity.**
 
 ---
 
 ## ⚙️ Configuration
 
-### Customize Auto-Recording
-
-Edit `~/.claude/plugins/marathon/hooks/auto-log-progress.sh`:
+### Adjust Auto-Checkpoint Threshold
 
 ```bash
-# Example: Only log git commands
-if echo "$COMMAND" | grep -q '^git'; then
-  echo "- [$TIMESTAMP] ⚡ Git: \`$COMMAND\`" >> "$WORKSPACE/progress.md"
-fi
+/marathon-config
 ```
 
-### Workspace Cleanup
+Interactive prompt:
+- **10-15**: Fast-paced work, frequent summaries
+- **20-30**: Balanced (recommended)
+- **30-50**: Deep work, less frequent summaries
 
-```bash
-# Delete sessions older than 30 days
-find workspace -type d -name "session_*" -mtime +30 -exec rm -rf {} +
+### Default Settings
 
-# View workspace disk usage
-du -sh workspace/session_*
+```json
+{
+  "auto_checkpoint": {
+    "enabled": true,
+    "tool_call_threshold": 20
+  },
+  "smart_summarization": {
+    "enabled": true,
+    "use_haiku": true
+  }
+}
 ```
 
 ---
 
-## 📊 Example Workflow
+## 🎯 Use Cases
 
-```
-Day 1: Start Task
-├─ Session 1 (2 hours)
-│  ├─ Auto: workspace created
-│  ├─ Work: Initial implementation
-│  ├─ /marathon-checkpoint (after core done)
-│  └─ End: Context compressed
+Perfect for:
 
-Day 3: Continue Task
-├─ Session 2 (1.5 hours)
-│  ├─ /marathon-review (restore context)
-│  ├─ Work: Add features
-│  ├─ /marathon-checkpoint (milestone reached)
-│  └─ End: User break
+✅ **Long-Running Features** - Multi-day implementations, refactorings, migrations
+✅ **Research & Learning** - Exploring technologies, prototyping, investigations
+✅ **Bug Hunts** - Hard-to-reproduce bugs, performance tuning, security audits
+✅ **Documentation** - Technical writing, API docs, architecture design
 
-Day 5: Continue Task
-├─ Session 3 (2 hours)
-│  ├─ /marathon-review (quick recap)
-│  ├─ Work: Testing & polish
-│  ├─ /marathon-checkpoint (tests passing)
-│  └─ End: Context compressed
+Works great with:
 
-Day 7: Finish Task
-└─ Session 4 (1 hour)
-   ├─ /marathon-review (final push)
-   ├─ Work: Documentation
-   ├─ /marathon-end (COMPLETE!)
-   └─ Result: Comprehensive task archive
-```
+- 🔄 Context compression scenarios
+- 🎯 Multiple parallel projects
+- 📚 Knowledge accumulation over time
+- 🤝 Team handoffs
+- 📊 Long-term progress tracking
+
+---
+
+## 📊 Cost & Performance
+
+### Auto Checkpoint Performance
+- **Recording**: Instant (no delay)
+- **Summarization**: Background (zero interruption)
+- **User experience**: Seamless
+
+### Cost Estimation (Claude Haiku)
+- Per summary: ~$0.0001
+- 20 summaries/day: ~$0.002/day
+- **Monthly: < $0.10** 💸
+
+Extremely cheap for massive value!
 
 ---
 
 ## 🔧 Troubleshooting
 
-### Issue: Workspace not created automatically
-
-**Check**:
-1. Plugin enabled in `~/.claude/settings.json`?
-2. Hook scripts executable? `ls -l ~/.claude/plugins/marathon/hooks/`
+### Workspace not created?
+1. Check plugin enabled in `~/.claude/settings.json`
+2. Verify hook scripts executable: `ls -l ~/.claude/plugins/marathon/hooks/`
 3. Restart Claude Code
 
-### Issue: Auto-recording not working
+### Auto-recording not working?
+1. Ensure `auto-log-progress.sh` is executable
+2. Confirm `workspace/session_*` exists
+3. Check PostToolUse hook in `hooks/hooks.json`
 
-**Check**:
-1. `auto-log-progress.sh` executable?
-2. `workspace/session_*` directory exists?
-3. PostToolUse hook configured correctly?
-
-### Issue: Task review can't find previous sessions
-
-**Possible causes**:
-- jq not installed (install: `brew install jq`)
-- Old sessions lack `working_directory` in session.json
-- Working in different directory than previous sessions
+### Can't find previous sessions?
+- Install `jq`: `brew install jq`
+- Old sessions may lack `working_directory` in `session.json`
+- Ensure working in same directory as previous sessions
 
 ---
 
 ## 🤝 Contributing
 
-Contributions welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md)
+Contributions welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-### Development Setup
-
+**Development Setup**:
 ```bash
 git clone https://github.com/b4yesc4t/claude-marathon
 cd claude-marathon
 
-# Link to Claude plugins (dev mode)
+# Link for dev testing
 ln -s $(pwd) ~/.claude/plugins/marathon-dev
-
-# Make changes and restart Claude Code to test
 ```
 
 ---
@@ -388,18 +305,26 @@ MIT License - see [LICENSE](./LICENSE)
 
 ## 🙏 Acknowledgments
 
-- Built for the Claude Code community
-- Inspired by real challenges in long-running development tasks
-- Thanks to all contributors and users!
+Built for the Claude Code community. Inspired by real challenges in long-running development.
+
+Special thanks to:
+- [Anthropic](https://anthropic.com) for Claude Code
+- [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) community
+- All contributors and users
 
 ---
 
 ## 📬 Support
 
-- 📖 Documentation: [Full docs](./docs/)
-- 🐛 Issues: [GitHub Issues](https://github.com/b4yesc4t/claude-marathon/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/b4yesc4t/claude-marathon/discussions)
+- 📖 **Documentation**: [Full docs](./docs/)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/b4yesc4t/claude-marathon/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/b4yesc4t/claude-marathon/discussions)
 
 ---
 
-**Master your long-running tasks with Claude Marathon!** 🚀
+**Run your marathon with confidence!** 🏃‍♂️💨
+
+**Related Projects**:
+- [Official Claude Plugins](https://github.com/anthropics/claude-plugins-official)
+- [Everything Claude Code](https://github.com/affaan-m/everything-claude-code)
+- [Awesome Claude Code](https://github.com/hesreallyhim/awesome-claude-code)

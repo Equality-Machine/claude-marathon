@@ -213,19 +213,25 @@ workspace/session_YYYYMMDD_HHMMSS_xxxxx/
 
 ---
 
-## Auto-Recording vs Checkpoint
+## Auto vs Manual Checkpoints
 
-**Auto-recording** (automatic):
-- Records every file edit, command execution
-- Appends to `progress.md` automatically
-- No analysis or context
+**Auto Checkpoint** (automatic, every N tool calls):
+- 🤖 Triggers automatically after N tool calls (default: 20)
+- 📊 Batch summarizes operations using Claude Haiku
+- ⚡ Fast, lightweight, no interruption
+- 📝 Appends smart summary to `progress.md`
+- ⚙️ Configure threshold via `/marathon-config`
 
-**Checkpoint** (manual via `/marathon-checkpoint`):
-- Provides context and analysis
-- Summarizes achievements
-- Records learnings and decisions
-- Creates snapshot if needed
-- **More valuable for task continuity**
+**Manual Checkpoint** (this command, `/marathon-checkpoint`):
+- 👤 User-initiated at important moments
+- 🎯 Deep analysis with context and insights
+- 💡 Records learnings and technical decisions
+- 📸 Can create code snapshots
+- **More valuable for complex task continuity**
+
+**When to use each**:
+- Auto checkpoint: Runs in background, you don't need to think about it
+- Manual checkpoint: Use after major achievements or before breaks
 
 ---
 

@@ -1,0 +1,12 @@
+{
+  "auto_checkpoint": {
+    "enabled": true,
+    "tool_call_threshold": 20,
+    "description": "Automatically summarize and checkpoint after N tool calls"
+  },
+  "smart_summarization": {
+    "enabled": true,
+    "use_haiku": true,
+    "description": "Use Claude Haiku for intelligent operation summaries"
+  }
+}
