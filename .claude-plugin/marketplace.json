@@ -13,7 +13,7 @@
     {
       "name": "marathon",
       "version": "1.0.0",
-      "source": ".",
+      "source": "./",
       "description": "Run the marathon of epic tasks with Claude. Never lose context, automatically track progress, and seamlessly continue work across sessions.",
       "author": {
         "name": "b4yesc4t"
