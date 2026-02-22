@@ -64,38 +64,60 @@ Session 2: /marathon-review
 
 ---
 
-## 🤖 Three-Layer Auto-Tracking
+## 🎮 Complete Workflow
 
-| Layer | How | When | Cost |
-|:------|:----|:-----|:-----|
-| **🤖 Auto Checkpoint** | AI batch summary | Every 20 tool calls | <$0.10/mo |
-| **👤 Manual Checkpoint** | `/marathon-checkpoint` | After milestones | Free |
-| **🏁 Milestone** | `/marathon-milestone` | Major achievements | Free |
+Marathon provides a complete task lifecycle management:
 
-### Auto Checkpoint Example
-
-```markdown
-## 📊 Auto Summary (11:03)
-- [11:02] 📝 Edit: test_manual.txt
-- [11:03] 🔧 Refactor: auth module (login.js, token.js)
+```
+Session Start
+  ↓
+📖 /marathon-review        ← Restore context from previous sessions
+  ↓
+⚙️ /marathon-config        ← (Optional) Configure auto-checkpoint threshold
+  ↓
+💻 Work on your task...
+  ├─ 🤖 Auto Checkpoint    ← Background: AI summarizes every 20 operations
+  ├─ 💾 /marathon-checkpoint  ← Manual: Save detailed progress at key moments
+  └─ 🏁 /marathon-milestone   ← Manual: Mark major achievements
+  ↓
+✅ /marathon-end           ← Complete and archive when task is done
 ```
 
-**Zero interruption. Background execution. Claude Haiku does the work.**
+### 🤖 Auto Checkpoint (Automatic)
+
+**Runs in background automatically - no command needed!**
+
+- **What**: AI batch summarizes recent operations using Claude Haiku
+- **When**: Every N tool calls (default: 20, configurable)
+- **Cost**: < $0.10/month
+- **Example**:
+  ```markdown
+  ## 📊 Auto Summary (11:03)
+  - [11:02] 📝 Edit: test_manual.txt
+  - [11:03] 🔧 Refactor: auth module (login.js, token.js)
+  ```
 
 ---
 
-## 🎮 Commands
+## 📋 All Commands
 
-| Command | Purpose | When to Use |
-|:--------|:--------|:------------|
-| **Auto Checkpoint** | AI batch summary (automatic) | Every N tool calls (default: 20) |
-| `/marathon-config` | Configure settings | Adjust auto-checkpoint threshold (10-50) |
-| `/marathon-checkpoint` | Save detailed checkpoint | After completing major work, before breaks |
-| `/marathon-milestone` | Mark achievement | MVP complete, deployment, major goal reached |
-| `/marathon-review` | Restore context | Start of new session, resuming work |
-| `/marathon-end` | Complete and archive | Task fully finished, create final summary |
+### Session Lifecycle
 
-**Note**: Auto checkpoint runs automatically in background - no command needed!
+| Command | Purpose | When to Use | Type |
+|:--------|:--------|:------------|:-----|
+| **`/marathon-review`** | Restore context from previous sessions | **Session start** - Load past work | Manual |
+| **`/marathon-config`** | Configure auto-checkpoint threshold | Anytime - Adjust frequency (10-50 calls) | Manual |
+| **Auto Checkpoint** | AI batch summary via Claude Haiku | **During work** - Every N operations | Automatic |
+| **`/marathon-checkpoint`** | Save detailed progress report | **During work** - After key milestones | Manual |
+| **`/marathon-milestone`** | Mark major achievement | **During work** - Celebrate important wins | Manual |
+| **`/marathon-end`** | Complete and archive task | **Session end** - Final summary & archive | Manual |
+
+### Key Distinctions
+
+**Auto vs Manual**:
+- **Auto Checkpoint**: Background AI summary, runs automatically every N operations
+- **Manual Checkpoint** (`/marathon-checkpoint`): Detailed progress save with your analysis
+- **Milestone** (`/marathon-milestone`): Celebration marker for major achievements
 
 ---
 
