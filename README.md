@@ -16,7 +16,11 @@
 ```bash
 # Install
 cd ~/.claude/plugins
-git clone https://github.com/Equality-Machine/claude-marathon.git marathon
+git clone https://github.com/b4yesc4t/claude-marathon.git marathon
+
+# Verify installation
+cd marathon
+./verify-installation.sh
 
 # Enable in ~/.claude/settings.json
 {

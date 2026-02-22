@@ -11,6 +11,10 @@ cd ~/.claude/plugins
 # Clone the plugin
 git clone https://github.com/b4yesc4t/claude-marathon marathon
 
+# Verify installation
+cd marathon
+./verify-installation.sh
+
 # Enable the plugin
 # Edit ~/.claude/settings.json and add:
 {
@@ -54,7 +58,28 @@ git clone https://github.com/b4yesc4t/claude-marathon marathon
 
 ## Verify Installation
 
-After restarting Claude Code, start a new session:
+### Before Restarting (Structure Verification)
+
+Run the verification script to check plugin structure:
+
+```bash
+cd ~/.claude/plugins/marathon
+./verify-installation.sh
+```
+
+Expected output:
+```
+✅ Plugin structure verification complete!
+
+📌 Next steps:
+   1. Restart Claude Code
+   2. Start a new session
+   3. Check for Marathon initialization message
+```
+
+### After Restarting Claude Code
+
+Start a new session and verify:
 
 1. You should see:
    ```
@@ -121,12 +146,24 @@ rm -rf ~/.claude/plugins/marathon
 
 ### Plugin doesn't start
 
-1. **Check if plugin is enabled**:
+1. **Run verification script first**:
+   ```bash
+   cd ~/.claude/plugins/marathon
+   ./verify-installation.sh
+   ```
+
+2. **Check if plugin is enabled**:
    ```bash
    cat ~/.claude/settings.json | grep marathon
    ```
 
-2. **Check script permissions**:
+3. **Verify plugin structure**:
+   ```bash
+   ls -la ~/.claude/plugins/marathon/.claude-plugin/
+   # Should show: plugin.json
+   ```
+
+4. **Check script permissions**:
    ```bash
    ls -l ~/.claude/plugins/marathon/hooks/
    ```
@@ -137,7 +174,7 @@ rm -rf ~/.claude/plugins/marathon
    -rwxr-xr-x  ... auto-log-progress.sh
    ```
 
-3. **Check Claude Code logs** for error messages
+5. **Check Claude Code logs** for error messages
 
 ### Auto-recording not working
 
